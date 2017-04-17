@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+
+<div id='map'></div>
+<head>
+</head>
+
+<body>
+
+<script>
+var streetmap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'),
+	haddonfield = L.tileLayer('http://mapwarper.net/maps/tile/19483/{z}/{x}/{y}.png');	
+	delawaretownship = L.tileLayer('http://mapwarper.net/maps/tile/19637/{z}/{x}/{y}.png');
+	centertownship = L.tileLayer('http://mapwarper.net/maps/tile/19635/{z}/{x}/{y}.png');
+	chestercounty = L.tileLayer('http://mapwarper.net/maps/tile/19636/{z}/{x}/{y}.png');
+	haddon = L.tileLayer('http://mapwarper.net/maps/tile/19640/{z}/{x}/{y}.png');	
+	deptford = L.tileLayer('http://mapwarper.net/maps/tile/19638/{z}/{x}/{y}.png');
+	stockton = L.tileLayer('http://mapwarper.net/maps/tile/19646/{z}/{x}/{y}.png');
+	greenwich = L.tileLayer('http://mapwarper.net/maps/tile/19639/{z}/{x}/{y}.png');
+	westdeptford = L.tileLayer('http://mapwarper.net/maps/tile/19647/{z}/{x}/{y}.png');
+    	woodbury = L.tileLayer('http://mapwarper.net/maps/tile/19648/{z}/{x}/{y}.png');
+	goeologicalsurvey = L.tileLayer('http://maps.georeferencer.com/georeferences/890354948079/2017-04-16T23:55:15.190279Z/map/{z}/{x}/{y}.png?key=empIFqiUUldYuevvOzZm', {id: 'Geological map of New Jersey, from the State Geological Survey, of 1868 by Geo. H. Cook. (1872)', attribution: 'David Rumsey Historical Map Collection, © 2000 by Cartography Associates CC BY-NC-SA 2.0'});
+
+var counties = L.layerGroup([chestercounty, stockton, delawaretownship, greenwich, deptford, westdeptford, woodbury, centertownship, haddon, haddonfield]);
+
+var map = L.map('map', {
+	center: [39.898197, -75.031492], 
+	zoom: 12, 
+	layers: [streetmap, counties, goeologicalsurvey]
+  	});
+
+
+var icon1 = L.icon({iconUrl: './icons/icon1.png', iconSize: [40, 40]});
+var icon2 = L.icon({iconUrl: './icons/icon2.png', iconSize: [40, 40]});
+var icon3 = L.icon({iconUrl: './icons/icon3.png', iconSize: [40, 40]});
+var icon4 = L.icon({iconUrl: './icons/icon4.png', iconSize: [40, 40]});
+var icon5 = L.icon({iconUrl: './icons/icon5.png', iconSize: [40, 40]});
+var icon6 = L.icon({iconUrl: './icons/icon6.png', iconSize: [40, 40]});
+var icon7 = L.icon({iconUrl: './icons/icon7.png', iconSize: [40, 40]});
+var icon8 = L.icon({iconUrl: './icons/icon8.png', iconSize: [40, 40]});
+var icon9 = L.icon({iconUrl: './icons/icon9.png', iconSize: [40, 40]});
+
+var customOptions =
+  {
+    'maxWidth': '500',
+    'className' : 'custom'
+	}
+
+var customPopup = "<h1>The Creek Bed, 2010</h1><br/><h2>Here is some<br/>example text<br/></h2><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NHL_Marl_Pit_2.JPG/1280px-NHL_Marl_Pit_2.JPG' width='350px'/>";
+	L.marker([39.910320, -75.028256], {icon: icon1}).bindPopup(customPopup,customOptions).addTo(map);
+    
+var customPopup2 = "<h1>Hadrosaurus Statue</h1><br/><h2>Lantern Lane<br/>Haddonfield, NJ<br/></h2><img src='http://hadrosaurus.com/hadro_sculpture.jpg' width='350px'/>";
+	L.marker([39.896909, -75.034466], {icon: icon2}).bindPopup(customPopup2,customOptions).addTo(map);
+
+var baseMaps = {
+    	"County Maps": counties,
+    	"Geological Survey": goeologicalsurvey
+	};
+
+L.control.layers(baseMaps).addTo(map);
+
+</script>
+
+</body>
+</html>
+
